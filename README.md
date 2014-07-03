@@ -8,7 +8,7 @@ About
 
 This is essentially a Bill Calculator on tax, tip and per person split in a restaurant scene. On top of that it provides specialized functions for a birthday party, where the ideas come from a friend.
 
-In the repository, BirthdayCalculator is the project. The other appcompat_v7 is the template project used by Eclipse. Both should be imported into Eclipse to set up the development environment.
+In the repository, BirthdayCalculator is the project. The other appcompat_v7 is the template project used by Eclipse. Both should be imported into Eclipse to set up the development environment. The Product folder contains the apk file that can be used to install BirthdayCalculator on your Android Phone, and a screenshot image of the App.
 
 Development environment
 -----------------------
