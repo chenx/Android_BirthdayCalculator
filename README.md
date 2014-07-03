@@ -13,7 +13,7 @@ In the repository, BirthdayCalculator is the project. The other appcompat_v7 is 
 Development environment
 -----------------------
 
-Windows Server 2008 R2, Intel(R) Xeon(R) CPU, W3530 @ 2.80GHz, RAM 4.00GB, 64-bit OS.
-Eclipse Java EE IDE for Web Developers, Version Keploer Service Release 2, Build id: 20140224-0627
-Android Development Toolkit, Version: 22.6.3.v201404151837-1123206
-Java version: 1.6.0_26
+- Windows Server 2008 R2, Intel(R) Xeon(R) CPU, W3530 @ 2.80GHz, RAM 4.00GB, 64-bit OS.
+- Eclipse Java EE IDE for Web Developers, Version Keploer Service Release 2, Build id: 20140224-0627
+- Android Development Toolkit, Version: 22.6.3.v201404151837-1123206
+- Java version: 1.6.0_26
