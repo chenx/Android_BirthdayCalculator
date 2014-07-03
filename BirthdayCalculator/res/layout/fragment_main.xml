@@ -1,0 +1,343 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="9"
+    android:stretchColumns="0,1,2,3,4,5,6,7,8"
+    android:gravity="top"
+    android:background="@drawable/birthday1"
+    android:tileMode="disabled"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+
+    <TableRow android:id="@+id/tableRow1"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <TextView
+	        android:layout_weight="27"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:text="@string/xml_subTotal" />
+	    
+	    <EditText
+	        android:id="@+id/txtBill"
+	        android:layout_weight="43"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:inputType="numberDecimal"
+	        android:text="" />
+	     	        
+	    <TextView
+	        android:layout_weight="30"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_total" />	        
+    </TableRow>
+        	     
+	<TableRow android:id="@+id/tableRowTax"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">    
+        
+		<CheckBox
+		    android:id="@+id/cbIncludeTaxForTip"
+		    android:layout_weight="37"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content" 
+		    android:text="@string/xml_tax" />
+			    
+		<TextView
+		    android:id="@+id/txtTax"
+	        android:layout_weight="33"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:text="@string/xml_$0" />
+	
+	     <TextView
+	        android:id="@+id/txtTotal"
+	        android:layout_weight="30"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+    
+    <TableRow android:id="@+id/tableRow2"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <RadioButton
+			android:id="@+id/radio0"
+			android:layout_weight="37"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:onClick="onClick_Tip0"
+			android:text="@string/xml_tip0" />
+	    
+	    <TextView
+	        android:id="@+id/txt_Tip0"
+	        android:layout_weight="33"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:text="@string/xml_$0" />
+	
+	    <TextView
+	        android:id="@+id/txt_Total0"
+	        android:layout_weight="30"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+
+
+    <TableRow android:id="@+id/tableRow3"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <RadioButton
+			android:id="@+id/radio1"
+			android:layout_weight="37"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:checked="false"
+			android:onClick="onClick_Tip1"
+			android:text="@string/xml_tip1" />
+	    
+	    <TextView
+	        android:id="@+id/txt_Tip1"
+			android:layout_weight="33"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:text="@string/xml_$0" />
+	
+	    <TextView
+	        android:id="@+id/txt_Total1"	 
+			android:layout_weight="30"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+
+    <TableRow android:id="@+id/tableRow4"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <RadioButton
+			android:id="@+id/radio2"
+			android:layout_width="0dp"
+			android:layout_weight="37"
+			android:layout_height="wrap_content"
+			android:checked="false"
+			android:onClick="onClick_Tip2"
+			android:text="@string/xml_tip2" />
+	    
+	    <TextView
+	        android:id="@+id/txt_Tip2"
+	        android:layout_width="0dp"
+			android:layout_weight="33"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:text="@string/xml_$0" />
+	
+	    <TextView
+	        android:id="@+id/txt_Total2"
+	        android:layout_width="0dp"
+			android:layout_weight="30"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+
+    <TableRow android:id="@+id/tableRow5"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <RadioButton
+			android:id="@+id/radio3"
+	        android:layout_width="0dp"
+			android:layout_weight="37"
+			android:layout_height="wrap_content"
+			android:checked="false"
+			android:onClick="onClick_Tip3"
+			android:text="@string/xml_tip3" />
+	    
+	    <TextView
+	        android:id="@+id/txt_Tip3"
+	        android:layout_width="0dp"
+			android:layout_weight="33"
+	        android:layout_height="wrap_content"
+	        android:text="@string/xml_$0" />
+	
+	    <TextView
+	        android:id="@+id/txt_Total3"
+	        android:layout_width="0dp"
+			android:layout_weight="30"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+    
+    
+    <TableRow android:id="@+id/tableRow6"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+        <TableLayout 
+		    android:id="@+id/tableLayout2"
+	        android:layout_width="0dp"
+			android:layout_weight="37"
+		    android:layout_height="wrap_content"
+		    tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+		<TableRow>
+	    <RadioButton
+			android:id="@+id/radioCustom"
+			android:layout_width="30dp"
+			android:layout_height="wrap_content"
+			android:checked="false"
+			android:onClick="onClick_TipCustom"
+			android:text="" />	    
+	    <EditText android:id="@+id/txt_TipCustomInput"
+	        android:layout_width="50dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:inputType="numberDecimal"
+	        android:onClick="onClick_TipCustom"
+	        android:text="@string/xml_tipCustomValue" />
+	    <TextView 
+	        android:layout_width="20dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="left"
+	        android:text="@string/xml_tipCustom" />
+	    </TableRow>
+	    </TableLayout>
+	    
+	    <TextView
+	        android:id="@+id/txt_TipCustom"
+	        android:layout_width="0dp"
+			android:layout_weight="33"
+	        android:layout_height="wrap_content"
+	        android:text="@string/xml_$0" />
+	
+	    <TextView
+	        android:id="@+id/txt_TotalCustom"
+	        android:layout_width="0dp"
+			android:layout_weight="30"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+    
+
+    <TableRow android:id="@+id/tableRow7"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tablerow_background"
+        android:padding="5dip">
+	        
+	    <TextView
+	        android:layout_width="0dp"
+			android:layout_weight="37"
+	        android:layout_height="match_parent"
+	        android:gravity="center"
+	        android:text="@string/xml_persons" />
+	
+    	<TableLayout 
+		    android:id="@+id/tableLayout7_1"
+	        android:layout_width="0dp"
+			android:layout_weight="33"
+		    android:layout_height="wrap_content"
+		    tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+		<TableRow>
+    	<Button android:id="@+id/btn_inc_person"
+	       	android:layout_width="45dp"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:onClick="btn_IncPerson_OnClick"
+			android:text="@string/xml_plus" />
+	    <Button android:id="@+id/btn_dec_person"
+	       	android:layout_width="45dp"
+			android:layout_height="wrap_content"
+			android:onClick="btn_DecPerson_OnClick"
+			android:text="@string/xml_minus" />
+		</TableRow>
+	    </TableLayout>
+	        
+	    	
+	    <EditText
+	        android:id="@+id/txt_NumberOfPersons"
+	        android:layout_width="0dp"
+			android:layout_weight="30"
+	        android:layout_height="fill_parent"
+	        android:gravity="center"
+	        android:inputType="number"
+	        android:text="@string/xml_1" />
+	    
+    </TableRow>
+    
+
+    <TableRow android:id="@+id/tableRow8"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corners"
+        android:padding="10dip"
+        >
+	        
+	    <TextView
+	        android:layout_width="0dp"
+			android:layout_weight="70"
+			android:layout_height="wrap_content"
+			android:layout_span="2"
+			android:gravity="left"
+			android:text="@string/xml_billPerPerson" />
+	    
+	    <TextView	        
+	        android:id="@+id/txt_BillPerPerson"
+	        android:layout_width="0dp"
+			android:layout_weight="30"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="@string/xml_$0" />
+    </TableRow>
+        
+    
+</TableLayout>
