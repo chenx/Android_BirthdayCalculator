@@ -10,7 +10,7 @@ This is essentially a Bill Calculator on tax, tip and per person split in a rest
 
 In the repository, BirthdayCalculator is the project. The other appcompat_v7 is the template project used by Eclipse. Both should be imported into Eclipse to set up the development environment. The Product folder contains the apk file that can be used to install BirthdayCalculator on your Android Phone, and a screenshot image of the App.
 
-You can download releases (including installation apk file and screenshot image) from the <a href="https://github.com/chenx/Android_BirthdayCalculator/releases">release link above</a>.
+You can download releases (including source code, installation apk file and screenshot image) from the <a href="https://github.com/chenx/Android_BirthdayCalculator/releases">release link above</a>.
 
 Development environment
 -----------------------
