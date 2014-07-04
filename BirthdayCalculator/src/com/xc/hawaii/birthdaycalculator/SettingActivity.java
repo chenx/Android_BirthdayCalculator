@@ -43,11 +43,11 @@ public class SettingActivity extends ActionBarActivity {
         this.txtTipRate2 = (EditText) findViewById(R.id.txtTipRate2);
         this.txtTipRate3 = (EditText) findViewById(R.id.txtTipRate3);
         
-        this.txtTaxRate.addTextChangedListener(new CustomTextWatcher(this.txtTaxRate, this.btnSaveTax, Util.RATE_TYPE.TAX));
-        this.txtTipRate0.addTextChangedListener(new CustomTextWatcher(this.txtTipRate0, this.btnSaveTip0, Util.RATE_TYPE.TIP));
-        this.txtTipRate1.addTextChangedListener(new CustomTextWatcher(this.txtTipRate1, this.btnSaveTip1, Util.RATE_TYPE.TIP));
-        this.txtTipRate2.addTextChangedListener(new CustomTextWatcher(this.txtTipRate2, this.btnSaveTip2, Util.RATE_TYPE.TIP));
-        this.txtTipRate3.addTextChangedListener(new CustomTextWatcher(this.txtTipRate3, this.btnSaveTip3, Util.RATE_TYPE.TIP));
+        this.txtTaxRate.addTextChangedListener(new MyTextWatcher(this.txtTaxRate, this.btnSaveTax, Util.RATE_TYPE.TAX));
+        this.txtTipRate0.addTextChangedListener(new MyTextWatcher(this.txtTipRate0, this.btnSaveTip0, Util.RATE_TYPE.TIP));
+        this.txtTipRate1.addTextChangedListener(new MyTextWatcher(this.txtTipRate1, this.btnSaveTip1, Util.RATE_TYPE.TIP));
+        this.txtTipRate2.addTextChangedListener(new MyTextWatcher(this.txtTipRate2, this.btnSaveTip2, Util.RATE_TYPE.TIP));
+        this.txtTipRate3.addTextChangedListener(new MyTextWatcher(this.txtTipRate3, this.btnSaveTip3, Util.RATE_TYPE.TIP));
         
         init();
         
@@ -122,12 +122,12 @@ public class SettingActivity extends ActionBarActivity {
      * @author X. Chen
      * @reference: http://stackoverflow.com/questions/4283062/textwatcher-for-more-than-one-edittext
      */
-    private class CustomTextWatcher implements TextWatcher {
+    private class MyTextWatcher implements TextWatcher {
         private EditText mEditText;
         private Util.RATE_TYPE mType;
         private Button mBtn;
 
-        public CustomTextWatcher(EditText e, Button b, Util.RATE_TYPE type) { 
+        public MyTextWatcher(EditText e, Button b, Util.RATE_TYPE type) { 
             mEditText = e;
             mBtn = b;
             mType = type;
