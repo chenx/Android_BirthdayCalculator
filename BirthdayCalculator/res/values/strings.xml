@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="DEBUG">false</string>
+    <string name="DEBUG">true</string>
 
     <string name="app_name">Birthday Calculator</string>
     <string name="hello_world">Hello world!</string>
@@ -28,14 +28,31 @@
     <string name="xml_plus">+</string>
     <string name="xml_minus">-</string>
     <string name="xml_billPerPerson">Bill Per Person:</string>
-    
-	<!-- For data storage -->
-    <string name="KEY_INIT">BirthdayCaculator_Initialized</string>
-    <string name="KEY_TAXRATE">BirthdayCaculator_TaxRate</string>
+       
+    <!-- For data storage of MainActivity -->
     <string name="KEY_SubTotal">BirthdayCaculator_SubTotal</string>
     <string name="KEY_IncTaxForTip">BirthdayCaculator_IncTaxForTip</string>
     <string name="KEY_TipChoice">BirthdayCaculator_TipChoice</string>
     <string name="KEY_TipCustom">BirthdayCaculator_TipCustom</string>
     <string name="KEY_Persons">BirthdayCaculator_Persons</string>
 
+    <!-- For data storage of SettingActivity -->
+    <string name="KEY_INIT">BirthdayCaculator_Initialized</string>
+    <string name="KEY_TAXRATE">BirthdayCaculator_TaxRate</string>
+    <string name="KEY_TipRate0">BirthdayCaculator_TipRate0</string>
+    <string name="KEY_TipRate1">BirthdayCaculator_TipRate1</string>
+    <string name="KEY_TipRate2">BirthdayCaculator_TipRate2</string>
+    <string name="KEY_TipRate3">BirthdayCaculator_TipRate3</string>
+    
+    <!-- For activity_settings.xml -->
+    <string name="xml_tax_rate">Tax Rate: </string>
+    <string name="xml_txt_default_tax_rate">Default Tip Rate: </string>
+    <string name="xml_default_tax_rate">4.712</string>
+    <string name="xml_percent">%</string>
+    <string name="xml_save">Save</string>
+    
+    <string name="xml_1st_tip">1.</string>
+    <string name="xml_2nd_tip">2.</string>
+    <string name="xml_3rd_tip">3.</string>
+    <string name="xml_4th_tip">4.</string>
 </resources>

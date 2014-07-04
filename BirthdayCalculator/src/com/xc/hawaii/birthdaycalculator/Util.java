@@ -18,17 +18,15 @@ import android.util.Log;
  * 
  */
 public class Util extends ActionBarActivity  {
-	private static boolean DEBUG;
+	private static boolean DEBUG = false;
+	public static String CONST_SharedPrefName = "BirthdayCalculator";
 	
 	public Util() {
 		// Get debug variable from values/strings.xml.
-		try {
-			DEBUG = Boolean.parseBoolean(getString(R.string.DEBUG));
-		} catch (Exception ex) {
-			Log.e("BirthdayCalculator.Util", "Wrong setting for variable DEBUG");
-			DEBUG = false;
-		}
 	}
+	
+	public static void setDebugMode(boolean DebugMode) { DEBUG = DebugMode; }
+	public static boolean getDebugMode() { return DEBUG; }
 	
 	/**
 	 * Display a dialog.
@@ -53,11 +51,6 @@ public class Util extends ActionBarActivity  {
 		
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		
-		//Drawable d = new ColorDrawable(Color.BLACK); // android.graphics.Color.TRANSPARENT
-		//d.setAlpha(130);
-		//alertDialog.getWindow().setBackgroundDrawable(d);
-		//alertDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-		
 		alertDialog.show();		
 	}
 	
@@ -80,7 +73,7 @@ public class Util extends ActionBarActivity  {
 		
 		dialog.show();		
 	}
-	
+		
 	/**
 	 * Central place for logging.
 	 * @param tag
@@ -88,15 +81,19 @@ public class Util extends ActionBarActivity  {
 	 */
 	public static void Log(String tag, String msg) {
 		if (! DEBUG) return;
-		Log.i(tag, msg);
+		Log.d(tag, msg);
 	}
 	
 	public static void Log(String tag, String msg, String type) {
-		if (type == "e") {
-			Log.e(tag, msg);
-		}
-		else {
-			Log.i(tag, msg);
-		}
+		if (type == "e") { Log.e(tag, msg); }
+		else if (type == "w") { Log.w(tag, msg); }
+		else if (type == "i") { Log.i(tag, msg); }
+		else if (type == "d") { Log.d(tag, msg); }
+		else { Log.v(tag, msg); }
+	}
+	
+	public static enum RATE_TYPE {
+		TAX, /* 0-99, double  */
+		TIP  /* 0-99, integer */
 	}
 }

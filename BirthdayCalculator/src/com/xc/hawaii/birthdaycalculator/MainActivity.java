@@ -1,5 +1,8 @@
 package com.xc.hawaii.birthdaycalculator;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,8 +44,24 @@ public class MainActivity extends ActionBarActivity {
 		//	getSupportFragmentManager().beginTransaction()
 		//			.add(R.id.container, new PlaceholderFragment()).commit();
 		//}
-		
-		init();
+		this.getDebugMode();
+		Util.Log("MainActivity", "enter onCreate()");
+	}
+	
+	/**
+	 * Value is stored in res/values/strings.xml.
+	 * Turn this on only for development.
+	 */
+	private void getDebugMode() {
+		try {
+			Util.setDebugMode( Boolean.parseBoolean(getString(R.string.DEBUG)) );
+		 	if (Util.getDebugMode()) {
+		 		Util.Log("MainActivity", "getDebugMode(): " + Util.getDebugMode());
+		 	}
+		} catch (Exception ex) {
+			Util.setDebugMode (false);
+			Util.Log("MainActivity", "getDebugMode(): Wrong setting for variable DEBUG");
+		}		
 	}
 	
 	/**
@@ -51,9 +70,101 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	@Override
 	protected void onPause() {
+		Util.Log("MainAcitivity", "enter onPause()");
 		super.onPause();
+		this.saveState();
+	}
+		
+	/**
+	 * Recover the state of this activity.
+	 */
+	@Override
+	protected void onResume() {
+		Util.Log("MainAcitivity", "enter onResume()");
+		super.onResume();
+		this.init(); //_params();
+		this.recoverState();
+		
+		// set cursor to end of string.
+		this.txt_Bill.setSelection(this.txt_Bill.getText().length());		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			Intent intent = new Intent(this, SettingActivity.class);
+			startActivity(intent);		
+
+			return true;
+		}
+		else if (id == R.id.action_clear) {
+			new AlertDialog.Builder(this)
+			.setTitle("Confirm")
+			.setMessage("Clear bill information?")
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					MainActivity.this.setState("", false, 0, "17", "1");
+					MainActivity.this.saveState();
+
+					Toast.makeText(getApplicationContext(), 
+							getString(R.string.msg_billInfoCleared), 
+							Toast.LENGTH_SHORT).show();
+				}
+			})
+			.setNegativeButton(android.R.string.no, null).show();
+					
+			return true;
+		}
+		else if (id == R.id.action_about) {
+			Util.showDialog("About", getString(R.string.msg_about), this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main, container,
+					false);
+			
+			return rootView;
+		}
+	}
+
+	
+	
+	/**********************************************************************
+	 * Start major sections of functions.
+	 **********************************************************************/
+	
+	/**
+	 * Save current state to persistent storage.
+	 */
+	private void saveState() {
 		SharedPreferences pref = getPreferences(MODE_PRIVATE);
 		SharedPreferences.Editor editor = pref.edit();
+		
+		//Util.Log("MainActivity", "saveState(subTotal = " + this.txt_Bill.getText().toString().trim() + ")");
 		
 		editor.putBoolean(getString(R.string.KEY_INIT), true);
 		editor.putString(getString(R.string.KEY_SubTotal), this.txt_Bill.getText().toString().trim());
@@ -66,26 +177,23 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	/**
-	 * Recover the state of this activity.
+	 * 	Recover state from persistent storage.
 	 */
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		try {
+	private void recoverState() {
+		try {		
 			SharedPreferences pref = getPreferences(MODE_PRIVATE);
 			Boolean initialized = pref.getBoolean(getString(R.string.KEY_INIT), false);
 			
 			if (initialized) {
 				this.setState(
-						pref.getString(getString(R.string.KEY_SubTotal), ""),
-						pref.getBoolean(getString(R.string.KEY_IncTaxForTip), false),
-						pref.getInt(getString(R.string.KEY_TipChoice), 0),				
-						pref.getString(getString(R.string.KEY_TipCustom), "17"),
-						pref.getString(getString(R.string.KEY_Persons), "1")
+					pref.getString(getString(R.string.KEY_SubTotal), ""),
+					pref.getBoolean(getString(R.string.KEY_IncTaxForTip), false),
+					pref.getInt(getString(R.string.KEY_TipChoice), 0),				
+					pref.getString(getString(R.string.KEY_TipCustom), "17"),
+					pref.getString(getString(R.string.KEY_Persons), "1")
 				);
 			}
-			Util.Log("onResume", "subtotal retrived: ");
+			Util.Log("onResume", "subtotal retrived: " + this.txt_Bill.getText());
 			
 		} catch (Exception ex) {
 			Util.Log("onResume", "error: " + ex.getMessage());
@@ -102,6 +210,9 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	private void setState(String subTotal, boolean incTaxForTip, 
 			int tipChoice, String tipCustom, String persons) {
+		
+		//Util.Log("MainActivity", "setState(subTotal = " + subTotal + ")");
+		
 		this.txt_Bill.setText( subTotal );
 		this.cbIncludeTaxForTip.setChecked( incTaxForTip );
 		this.txt_TipCustomInput.setText( tipCustom );
@@ -137,64 +248,7 @@ public class MainActivity extends ActionBarActivity {
 			break;
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			Intent intent = new Intent(this, SettingActivity.class);
-			startActivity(intent);		
-
-			return true;
-		}
-		else if (id == R.id.action_clear) {
-			this.setState("", false, 0, "17", "1");
-			Toast.makeText(getApplicationContext(), 
-					getString(R.string.msg_billInfoCleared), 
-					Toast.LENGTH_SHORT).show();
-			return true;
-		}
-		else if (id == R.id.action_about) {
-			Util.showDialog("About", getString(R.string.msg_about), this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			
-			return rootView;
-		}
-	}
-
 	
-	
-	/**********************************************************************
-	 * Start major sections of functions.
-	 **********************************************************************/
-		
 	
 	public void onClick_Tip0(View view) {
 		this.btn_Tip_selected = 0;
@@ -251,11 +305,48 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	/**
+	 * Initialize tax rate, and the default tip rates.
+	 * These parameters are shared by MainActivity and SettingActivity.
+	 */
+	private void init_params() {
+		Util.Log("MainActivity", "enter init_param()");
+	    String strTaxRate = "", tip_rate0 = "", tip_rate1 = "", tip_rate2 = "", tip_rate3 = "";
+		try {
+			SharedPreferences sharedPref = this.getSharedPreferences(Util.CONST_SharedPrefName, Context.MODE_PRIVATE);
+			boolean hasPref = sharedPref.getBoolean(getString(R.string.KEY_INIT), false);
+			if (hasPref) {
+				strTaxRate = sharedPref.getString(getString(R.string.KEY_TAXRATE), "");
+				tip_rate0 = sharedPref.getString(getString(R.string.KEY_TipRate0), "");
+				Util.Log("init_params", "A: tip rate 0 = " + tip_rate0);
+				tip_rate1 = sharedPref.getString(getString(R.string.KEY_TipRate1), "");
+				tip_rate2 = sharedPref.getString(getString(R.string.KEY_TipRate2), "");
+				tip_rate3 = sharedPref.getString(getString(R.string.KEY_TipRate3), "");
+			}
+		} catch (Exception ex) {
+			Util.Log("MainActivity.init()", "error: " + ex.getMessage(), "e");
+		}
+		
+		this.tax_rate = (strTaxRate.equals("")) ? SettingActivity.CONST_TAX_RATE : Double.parseDouble(strTaxRate);
+		this.tip_rate_0 = (tip_rate0.equals("")) ? SettingActivity.CONST_TIP_RATE0 : Integer.parseInt(tip_rate0);
+		this.tip_rate_1 = (tip_rate1.equals("")) ? SettingActivity.CONST_TIP_RATE1 : Integer.parseInt(tip_rate1);
+		this.tip_rate_2 = (tip_rate2.equals("")) ? SettingActivity.CONST_TIP_RATE2 : Integer.parseInt(tip_rate2);
+		this.tip_rate_3 = (tip_rate3.equals("")) ? SettingActivity.CONST_TIP_RATE3 : Integer.parseInt(tip_rate3);
+
+		this.tax_rate /= 100.0;
+		this.tip_rate_0 /= 100.0;
+		this.tip_rate_1 /= 100.0;
+		this.tip_rate_2 /= 100.0;
+		this.tip_rate_3 /= 100.0;
+
+		Util.Log("init_params", "B: tip rate 0 = " + tip_rate0);
+	}
+	
+	/**
 	 * Initialize this activity.
 	 */
 	private void init() {
-		this.tax_rate = SettingActivity.getTaxRate();
-		
+		this.init_params();
+
 		this.txt_Tax = (TextView) findViewById(R.id.txtTax);
 		this.txt_Total = (TextView) findViewById(R.id.txtTotal);
 		this.cbIncludeTaxForTip = (CheckBox) findViewById(R.id.cbIncludeTaxForTip);
@@ -275,10 +366,18 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
+		
 		this.btn_Tip0 = (RadioButton) findViewById(R.id.radio0);
 		this.btn_Tip1 = (RadioButton) findViewById(R.id.radio1);
 		this.btn_Tip2 = (RadioButton) findViewById(R.id.radio2);
 		this.btn_Tip3 = (RadioButton) findViewById(R.id.radio3);
+
+		this.btn_Tip0.setText( (int) (100 * this.tip_rate_0) + "% Tip: ");
+		this.btn_Tip1.setText( (int) (100 * this.tip_rate_1) + "% Tip: ");
+		this.btn_Tip2.setText( (int) (100 * this.tip_rate_2) + "% Tip: ");
+		this.btn_Tip3.setText( (int) (100 * this.tip_rate_3) + "% Tip: ");
+
+		
 		this.btn_TipCustom = (RadioButton) findViewById(R.id.radioCustom);
 		clear_Tips();
 		this.btn_Tip0.setChecked(true);
@@ -295,6 +394,7 @@ public class MainActivity extends ActionBarActivity {
 		this.txt_Total2 = (TextView) findViewById(R.id.txt_Total2);
 		this.txt_Total3 = (TextView) findViewById(R.id.txt_Total3);
 		this.txt_TotalCustom = (TextView) findViewById(R.id.txt_TotalCustom);
+		
 		
 		this.txt_TipCustomInput = (EditText) findViewById(R.id.txt_TipCustomInput);
 		///this.txt_TipCustomInput.setOnKeyListener(this);
@@ -336,6 +436,7 @@ public class MainActivity extends ActionBarActivity {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 		});
 		
+		
 		this.txt_Bill = (EditText) findViewById(R.id.txtBill);
 		this.txt_Bill.setOnKeyListener(new EditText.OnKeyListener() {
 			@Override
@@ -365,6 +466,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 				
+		
 		this.txt_NumberOfPersons = (EditText) findViewById(R.id.txt_NumberOfPersons);
 		this.txt_NumberOfPersons.addTextChangedListener(new TextWatcher() {
 			public void afterTextChanged(Editable s) {
@@ -375,10 +477,11 @@ public class MainActivity extends ActionBarActivity {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 		});
 		
+		
 		this.txt_BillPerPerson = (TextView) findViewById(R.id.txt_BillPerPerson);
 		
 		this.btn_IncPerson = (Button) findViewById(R.id.btn_inc_person);
-		this.btn_DecPerson = (Button) findViewById(R.id.btn_dec_person);		
+		this.btn_DecPerson = (Button) findViewById(R.id.btn_dec_person);	
 	}
 	
 	/**
@@ -642,10 +745,10 @@ public class MainActivity extends ActionBarActivity {
 	private TextView txt_Total; // sub-total + tax.
 	private CheckBox cbIncludeTaxForTip;
 	
-	private final double tip_rate_0 = 0.1;
-	private final double tip_rate_1 = 0.15;
-	private final double tip_rate_2 = 0.2;
-	private final double tip_rate_3 = 0.25;
+	private double tip_rate_0 = 0.1;
+	private double tip_rate_1 = 0.15;
+	private double tip_rate_2 = 0.2;
+	private double tip_rate_3 = 0.25;
 	private double tip_rate_custom = 0.17;
 	private double tax_rate = 0.04712;
 }
