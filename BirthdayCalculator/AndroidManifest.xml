@@ -25,8 +25,8 @@
         <activity
             android:name="com.xc.hawaii.birthdaycalculator.SettingActivity"
             android:label="@string/action_settings" 
-        	android:parentActivityName="com.xc.hawaii.birthdaycalculator.MainActivity">
-        	            
+            android:parentActivityName="com.xc.hawaii.birthdaycalculator.MainActivity">
+                        
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 
