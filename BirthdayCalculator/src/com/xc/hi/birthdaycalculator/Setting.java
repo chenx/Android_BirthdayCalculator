@@ -6,10 +6,10 @@ import android.content.SharedPreferences;
 /**
  * Handles the retrieval and saving of setting variables.
  * @author X. Chen
- *
+ * @since 7/7/2014
  */
 public class Setting {
-	private static Context ctx;
+    private static Context ctx;
 	
     private static double _tax_rate;
     private static int _tip_rate0;
@@ -27,11 +27,11 @@ public class Setting {
     private static String CONST_SharedPrefName = "com_xc_hi_birthdaycalculator";
     
     private Setting() {
-    	//Util.Log("SettingActivity()", "constructor");
+    	Util.Log("Setting()", "constructor");
     }
        
     public static Setting getInstance(Context context) {
-    	//Util.Log("Setting.getInstance()", "enter. setting is null? " + (setting == null));
+    	Util.Log("Setting.getInstance()", "enter. setting is null? " + (setting == null));
     	if (setting == null) {
     		setting = new Setting();
     	}
@@ -41,7 +41,7 @@ public class Setting {
     }
     
     private static void init() {
-    	//Util.Log("Setting.init()", "enter");
+    	Util.Log("Setting.init()", "enter");
         String strTaxRate = "", tip_rate0 = "", tip_rate1 = "", tip_rate2 = "", tip_rate3 = "";
         boolean hasPref = false;
         try {
@@ -54,7 +54,6 @@ public class Setting {
                 tip_rate2 = sharedPref.getString(ctx.getString(R.string.KEY_TipRate2), "");
                 tip_rate3 = sharedPref.getString(ctx.getString(R.string.KEY_TipRate3), "");
             }
-            //Util.Log("Setting.init()", "strTaxRate: " + strTaxRate);
         } catch (Exception ex) {
             Util.Log("Setting.init()", "error: " + ex.getMessage(), "e");
         } 
@@ -90,7 +89,6 @@ public class Setting {
         try {
             SharedPreferences sharedPref = ctx.getSharedPreferences(CONST_SharedPrefName, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            //editor.putBoolean(getString(R.string.KEY_INIT), true);
             editor.putString(ctx.getString(key), v);
             editor.commit();
         } catch (Exception ex) {

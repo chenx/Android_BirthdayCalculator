@@ -176,9 +176,6 @@ public class SettingActivity extends ActionBarActivity {
             this.txtTaxRate.setText(v);
         }
         
-        //_tax_rate = Double.parseDouble(v);
-        //Util.Log("btnSaveTax_onClick", "key=" + R.string.KEY_TAXRATE + ", v=" + v);
-        //this.setting = Setting.getInstance();
         this.setting.save(R.string.KEY_TAXRATE, v);
         
         String msg = "The tax rate has been updated";
