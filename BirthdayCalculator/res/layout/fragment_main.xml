@@ -12,7 +12,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+    tools:context="com.xc.hi.birthdaycalculator.MainActivity$PlaceholderFragment" >
 
     <TableRow android:id="@+id/tableRow1"
         android:layout_weight="1"
@@ -224,7 +224,7 @@
             android:layout_width="0dp"
             android:layout_weight="37"
             android:layout_height="wrap_content"
-            tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+            tools:context="com.xc.hi.birthdaycalculator.MainActivity$PlaceholderFragment" >
         <TableRow>
         <RadioButton
             android:id="@+id/radioCustom"
@@ -285,7 +285,7 @@
             android:layout_width="0dp"
             android:layout_weight="33"
             android:layout_height="wrap_content"
-            tools:context="com.xc.hawaii.birthdaycalculator.MainActivity$PlaceholderFragment" >
+            tools:context="com.xc.hi.birthdaycalculator.MainActivity$PlaceholderFragment" >
         <TableRow>
         <Button android:id="@+id/btn_inc_person"
                android:layout_width="45dp"

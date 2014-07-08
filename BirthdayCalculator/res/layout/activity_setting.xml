@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#F7F8E0"    
     android:paddingTop="20dp"
-    tools:context="com.xc.hawaii.birthdaycalculator.MainActivity"
+    tools:context="com.xc.hi.birthdaycalculator.MainActivity"
     tools:ignore="MergeRootFrame" >
 
     
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/xml_save"     
         android:gravity="center"       
-        android:onClick="btnSave_onClick"
+        android:onClick="btnSaveTax_onClick"
         />
 
         <TextView
