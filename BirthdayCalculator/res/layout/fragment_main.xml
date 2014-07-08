@@ -29,7 +29,7 @@
             android:text="@string/xml_subTotal" />
         
         <EditText
-            android:id="@+id/txtBill"
+            android:id="@+id/txtSubTotal"
             android:layout_weight="43"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

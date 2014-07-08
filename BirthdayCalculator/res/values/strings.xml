@@ -2,20 +2,22 @@
 <resources>
     <string name="DEBUG">true</string>
 
-    <string name="app_name">Birthday Calculator</string>
+    <string name="app_name">Bill Calculator</string>
     <string name="hello_world">Hello world!</string>
     
     <string name="action_clear">Clear</string>
     <string name="msg_billInfoCleared">Bill information cleared</string>
     
     <string name="action_settings">Settings</string>
+    <string name="action_background">Background</string>
     
     <string name="action_about">About</string>
-    <string name="msg_about">Android Production\nXC Inc.\nCopyrighted @ 2014</string>
+    <string name="msg_about"><font size="-1">Bill calculator is an easy-to-use tip calculator for per person bill.\n\n<center>Android Production\nXC Inc.\nCopyrighted @ July, 2014</center></font></string>
     
     <string name="xml_subTotal">SubTotal: $</string>
     <string name="xml_total">Total</string>
     <string name="xml_tax">Tax: </string>
+    <string name="xml_incTaxForTip">Include tax for tip calculation</string>
     <string name="xml_$0">$0.00</string>
     <string name="xml_tip0">10% Tip:</string>
     <string name="xml_tip1">15% Tip:</string>
@@ -43,6 +45,7 @@
     <string name="KEY_TipRate1">BirthdayCaculator_TipRate1</string>
     <string name="KEY_TipRate2">BirthdayCaculator_TipRate2</string>
     <string name="KEY_TipRate3">BirthdayCaculator_TipRate3</string>
+    <string name="KEY_TipRateCustom">BirthdayCaculator_TipRateCustom</string>
     
     <!-- For activity_settings.xml -->
     <string name="xml_tax_rate">Tax Rate: </string>
@@ -55,4 +58,8 @@
     <string name="xml_2nd_tip">2.</string>
     <string name="xml_3rd_tip">3.</string>
     <string name="xml_4th_tip">4.</string>
+    <string name="xml_custom_tip">Custom.</string>
+    
+    <string name="reset">Reset</string>
+    <string name="msg_settingReset">Settings are reset to default</string>
 </resources>

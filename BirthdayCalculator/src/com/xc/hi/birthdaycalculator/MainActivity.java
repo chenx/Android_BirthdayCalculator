@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
         this.recoverState();
         
         // set cursor to end of string.
-        this.txt_Bill.setSelection(this.txt_Bill.getText().length());        
+        this.txt_SubTotal.setSelection(this.txt_SubTotal.getText().length());        
     }
 
     @Override
@@ -126,12 +126,40 @@ public class MainActivity extends ActionBarActivity {
                     
             return true;
         }
+        /*else if (id == R.id.action_background) {
+        	Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        	startActivityForResult(intent, PICK_IMAGE);
+        }*/
         else if (id == R.id.action_about) {
             Util.showDialog("About", getString(R.string.msg_about), this);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    /*
+    private static final int PICK_IMAGE = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PICK_IMAGE && data != null && data.getData() != null) {
+            Uri _uri = data.getData();
+
+            //User had pick an image.
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(_uri, filePathColumn, null, null, null);
+            //cursor.moveToFirst();
+
+            //Link to the image
+            //int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            //String imageFilePath = cursor.getString( columnIndex );
+            //cursor.close();
+            
+        	Util.showDialog("image", "ok:", this);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    */
 
     /**
      * A placeholder fragment containing a simple view.
@@ -163,10 +191,10 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         
-        //Util.Log("MainActivity", "saveState(subTotal = " + this.txt_Bill.getText().toString().trim() + ")");
+        //Util.Log("MainActivity", "saveState(subTotal = " + this.txt_SubTotal.getText().toString().trim() + ")");
         
         editor.putBoolean(getString(R.string.KEY_INIT), true);
-        editor.putString(getString(R.string.KEY_SubTotal), this.txt_Bill.getText().toString().trim());
+        editor.putString(getString(R.string.KEY_SubTotal), this.txt_SubTotal.getText().toString().trim());
         editor.putBoolean(getString(R.string.KEY_IncTaxForTip), this.includeTaxForTip());
         editor.putInt(getString(R.string.KEY_TipChoice), this.btn_Tip_selected);
         editor.putString(getString(R.string.KEY_TipCustom), this.txt_TipCustomInput.getText().toString());
@@ -192,7 +220,7 @@ public class MainActivity extends ActionBarActivity {
                     pref.getString(getString(R.string.KEY_Persons), "1")
                 );
             }
-            Util.Log("onResume", "subtotal retrived: " + this.txt_Bill.getText());
+            Util.Log("onResume", "subtotal retrived: " + this.txt_SubTotal.getText());
             
         } catch (Exception ex) {
             Util.Log("onResume", "error: " + ex.getMessage());
@@ -212,7 +240,7 @@ public class MainActivity extends ActionBarActivity {
         
         //Util.Log("MainActivity", "setState(subTotal = " + subTotal + ")");
         
-        this.txt_Bill.setText( subTotal );
+        this.txt_SubTotal.setText( subTotal );
         this.cbIncludeTaxForTip.setChecked( incTaxForTip );
         this.txt_TipCustomInput.setText( tipCustom );
         this.txt_NumberOfPersons.setText( persons );
@@ -316,6 +344,7 @@ public class MainActivity extends ActionBarActivity {
         this.tip_rate_1 = this.setting.getTipRate1() / 100.0;
         this.tip_rate_2 = this.setting.getTipRate2() / 100.0;
         this.tip_rate_3 = this.setting.getTipRate3() / 100.0;
+        this.tip_rate_custom = this.setting.getTipRateCustom() / 100.0;
     }
     
     /**
@@ -415,15 +444,15 @@ public class MainActivity extends ActionBarActivity {
         });
         
         
-        this.txt_Bill = (EditText) findViewById(R.id.txtBill);
-        this.txt_Bill.setOnKeyListener(new EditText.OnKeyListener() {
+        this.txt_SubTotal = (EditText) findViewById(R.id.txtSubTotal);
+        this.txt_SubTotal.setOnKeyListener(new EditText.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER) return true; // don't accept this input.
                 return false; // accept this input.
             }
         });
-        this.txt_Bill.addTextChangedListener(new TextWatcher() {
+        this.txt_SubTotal.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 if (subTotalOutsideRange() || billOutsideRange()) return; // false;
 
@@ -433,7 +462,7 @@ public class MainActivity extends ActionBarActivity {
                 this$0.re_calculate();
                                 
                 // Only on txt_Bill, for KeyUp event, do the following.
-                String msg =  "key: input = " + this$0.txt_Bill.getText();
+                String msg =  "key: input = " + this$0.txt_SubTotal.getText();
                 Util.Log("MainActivity", msg);
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {};
@@ -502,7 +531,7 @@ public class MainActivity extends ActionBarActivity {
      * @return boolean
      */
     private boolean subTotalOutsideRange() {
-        String strTotalBill = this.txt_Bill.getText().toString().trim();
+        String strTotalBill = this.txt_SubTotal.getText().toString().trim();
         
         int dot_pos = strTotalBill.indexOf(".") + 1;
         if (dot_pos > 0 && strTotalBill.length() - dot_pos > 2) {
@@ -510,8 +539,8 @@ public class MainActivity extends ActionBarActivity {
             
             // do truncation.
             strTotalBill = strTotalBill.substring(0, strTotalBill.length() - 1);
-            this.txt_Bill.setText(strTotalBill);
-            this.txt_Bill.setSelection(strTotalBill.length());
+            this.txt_SubTotal.setText(strTotalBill);
+            this.txt_SubTotal.setSelection(strTotalBill.length());
             return true;
         }        
         return false;
@@ -526,14 +555,14 @@ public class MainActivity extends ActionBarActivity {
      * @return boolean
      */
     private boolean billOutsideRange() {
-        String v = this.txt_Bill.getText().toString().trim();
+        String v = this.txt_SubTotal.getText().toString().trim();
         if (v.equals("") || v.equals(".")) return false;
         double val = Double.parseDouble(v);
         if (val > 999999.0) {
             // do truncation.
             v = v.substring(0, v.length() - 1);
-            this.txt_Bill.setText(v);
-            this.txt_Bill.setSelection(v.length());
+            this.txt_SubTotal.setText(v);
+            this.txt_SubTotal.setSelection(v.length());
             return true;
         }
         return false;
@@ -565,7 +594,7 @@ public class MainActivity extends ActionBarActivity {
      * Calculate the per person bill.
      */
     private void calcBillPerPerson() {
-        String strTotalBill = this.txt_Bill.getText().toString().trim();
+        String strTotalBill = this.txt_SubTotal.getText().toString().trim();
         
         if (strTotalBill.equals("") || strTotalBill.equals(".")) {
             this.txt_Tax.setText("$0.00");
@@ -626,7 +655,7 @@ public class MainActivity extends ActionBarActivity {
      * Update tax and total bill: sub-total + tax.
      */
     private void updateTaxAndTotal() {
-        String strTotalBill = this.txt_Bill.getText().toString().trim();
+        String strTotalBill = this.txt_SubTotal.getText().toString().trim();
         if (strTotalBill.equals("") || strTotalBill.equals(".")) {
             this.txt_Tax.setText("$0.00");
             this.txt_Total.setText("$0.00");
@@ -647,7 +676,7 @@ public class MainActivity extends ActionBarActivity {
      * @param rate
      */
     private void updateTipAndTotal(TextView txtTip, TextView txtTotal, double rate) {
-        String strTotalBill = this.txt_Bill.getText().toString().trim();
+        String strTotalBill = this.txt_SubTotal.getText().toString().trim();
         if (strTotalBill.equals("") || strTotalBill.equals(".")) {
             txtTip.setText("$0.00");
             txtTotal.setText("$0.00");
@@ -713,7 +742,7 @@ public class MainActivity extends ActionBarActivity {
 
     private EditText txt_TipCustomInput;
     
-    private EditText txt_Bill;
+    private EditText txt_SubTotal;
     private double tip_rate;
     private EditText txt_NumberOfPersons;
     private TextView txt_BillPerPerson;

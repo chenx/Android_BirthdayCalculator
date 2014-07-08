@@ -19,9 +19,8 @@ import android.util.Log;
  * @since 7/2/2014
  * 
  */
-public class Util extends ActionBarActivity  {
+public class Util {
     private static boolean DEBUG = false;
-    //public static String CONST_SharedPrefName = "BirthdayCalculator";
     
     public Util() {
         // Get debug variable from values/strings.xml.

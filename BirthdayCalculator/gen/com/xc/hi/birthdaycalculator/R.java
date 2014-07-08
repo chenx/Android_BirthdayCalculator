@@ -1096,6 +1096,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
+        public static final int action_reset=0x7f05006f;
         public static final int action_settings=0x7f05006d;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
@@ -1170,7 +1171,7 @@ containing a value of this type.
         public static final int textView1=0x7f05003d;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
-        public static final int txtBill=0x7f05004a;
+        public static final int txtSubTotal=0x7f05004a;
         public static final int txtTax=0x7f05004d;
         public static final int txtTaxRate=0x7f05003e;
         public static final int txtTipRate0=0x7f050040;
@@ -1258,19 +1259,20 @@ containing a value of this type.
         public static final int DEBUG=0x7f0a000d;
         /**  For data storage of SettingActivity 
          */
-        public static final int KEY_INIT=0x7f0a0029;
-        public static final int KEY_IncTaxForTip=0x7f0a0025;
-        public static final int KEY_Persons=0x7f0a0028;
+        public static final int KEY_INIT=0x7f0a002b;
+        public static final int KEY_IncTaxForTip=0x7f0a0027;
+        public static final int KEY_Persons=0x7f0a002a;
         /**  For data storage of MainActivity 
          */
-        public static final int KEY_SubTotal=0x7f0a0024;
-        public static final int KEY_TAXRATE=0x7f0a002a;
-        public static final int KEY_TipChoice=0x7f0a0026;
-        public static final int KEY_TipCustom=0x7f0a0027;
-        public static final int KEY_TipRate0=0x7f0a002b;
-        public static final int KEY_TipRate1=0x7f0a002c;
-        public static final int KEY_TipRate2=0x7f0a002d;
-        public static final int KEY_TipRate3=0x7f0a002e;
+        public static final int KEY_SubTotal=0x7f0a0026;
+        public static final int KEY_TAXRATE=0x7f0a002c;
+        public static final int KEY_TipChoice=0x7f0a0028;
+        public static final int KEY_TipCustom=0x7f0a0029;
+        public static final int KEY_TipRate0=0x7f0a002d;
+        public static final int KEY_TipRate1=0x7f0a002e;
+        public static final int KEY_TipRate2=0x7f0a002f;
+        public static final int KEY_TipRate3=0x7f0a0030;
+        public static final int KEY_TipRateCustom=0x7f0a0031;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0a0001;
@@ -1311,39 +1313,44 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_about=0x7f0a0013;
+        public static final int action_about=0x7f0a0014;
+        public static final int action_background=0x7f0a0013;
         public static final int action_clear=0x7f0a0010;
         public static final int action_settings=0x7f0a0012;
         public static final int app_name=0x7f0a000e;
         public static final int hello_world=0x7f0a000f;
-        public static final int msg_about=0x7f0a0014;
+        public static final int msg_about=0x7f0a0015;
         public static final int msg_billInfoCleared=0x7f0a0011;
-        public static final int xml_$0=0x7f0a0018;
-        public static final int xml_1=0x7f0a0020;
-        public static final int xml_1st_tip=0x7f0a0034;
-        public static final int xml_2nd_tip=0x7f0a0035;
-        public static final int xml_3rd_tip=0x7f0a0036;
-        public static final int xml_4th_tip=0x7f0a0037;
-        public static final int xml_billPerPerson=0x7f0a0023;
-        public static final int xml_default_tax_rate=0x7f0a0031;
-        public static final int xml_minus=0x7f0a0022;
-        public static final int xml_percent=0x7f0a0032;
-        public static final int xml_persons=0x7f0a001f;
-        public static final int xml_plus=0x7f0a0021;
-        public static final int xml_save=0x7f0a0033;
-        public static final int xml_subTotal=0x7f0a0015;
-        public static final int xml_tax=0x7f0a0017;
+        public static final int msg_settingReset=0x7f0a003d;
+        public static final int reset=0x7f0a003c;
+        public static final int xml_$0=0x7f0a001a;
+        public static final int xml_1=0x7f0a0022;
+        public static final int xml_1st_tip=0x7f0a0037;
+        public static final int xml_2nd_tip=0x7f0a0038;
+        public static final int xml_3rd_tip=0x7f0a0039;
+        public static final int xml_4th_tip=0x7f0a003a;
+        public static final int xml_billPerPerson=0x7f0a0025;
+        public static final int xml_custom_tip=0x7f0a003b;
+        public static final int xml_default_tax_rate=0x7f0a0034;
+        public static final int xml_incTaxForTip=0x7f0a0019;
+        public static final int xml_minus=0x7f0a0024;
+        public static final int xml_percent=0x7f0a0035;
+        public static final int xml_persons=0x7f0a0021;
+        public static final int xml_plus=0x7f0a0023;
+        public static final int xml_save=0x7f0a0036;
+        public static final int xml_subTotal=0x7f0a0016;
+        public static final int xml_tax=0x7f0a0018;
         /**  For activity_settings.xml 
          */
-        public static final int xml_tax_rate=0x7f0a002f;
-        public static final int xml_tip0=0x7f0a0019;
-        public static final int xml_tip1=0x7f0a001a;
-        public static final int xml_tip2=0x7f0a001b;
-        public static final int xml_tip3=0x7f0a001c;
-        public static final int xml_tipCustom=0x7f0a001d;
-        public static final int xml_tipCustomValue=0x7f0a001e;
-        public static final int xml_total=0x7f0a0016;
-        public static final int xml_txt_default_tax_rate=0x7f0a0030;
+        public static final int xml_tax_rate=0x7f0a0032;
+        public static final int xml_tip0=0x7f0a001b;
+        public static final int xml_tip1=0x7f0a001c;
+        public static final int xml_tip2=0x7f0a001d;
+        public static final int xml_tip3=0x7f0a001e;
+        public static final int xml_tipCustom=0x7f0a001f;
+        public static final int xml_tipCustomValue=0x7f0a0020;
+        public static final int xml_total=0x7f0a0017;
+        public static final int xml_txt_default_tax_rate=0x7f0a0033;
     }
     public static final class style {
         /** 

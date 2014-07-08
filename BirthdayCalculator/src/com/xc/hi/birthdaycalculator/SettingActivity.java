@@ -1,5 +1,7 @@
 package com.xc.hi.birthdaycalculator;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -42,28 +44,35 @@ public class SettingActivity extends ActionBarActivity {
         this.txtTipRate3 = (EditText) findViewById(R.id.txtTipRate3);
                
     	this.setting = Setting.getInstance(this.getApplicationContext());
-    	//this.setting = new Setting( this.getApplicationContext() );
-    	        
+    	this.setSettings();
+
+        this.txtTaxRate.addTextChangedListener(new MyTextWatcher(
+        		this.txtTaxRate, this.btnSaveTax, Util.RATE_TYPE.TAX));
+        this.txtTipRate0.addTextChangedListener(new MyTextWatcher(
+        		this.txtTipRate0, this.btnSaveTip0, Util.RATE_TYPE.TIP));
+        this.txtTipRate1.addTextChangedListener(new MyTextWatcher(
+        		this.txtTipRate1, this.btnSaveTip1, Util.RATE_TYPE.TIP));
+        this.txtTipRate2.addTextChangedListener(new MyTextWatcher(
+        		this.txtTipRate2, this.btnSaveTip2, Util.RATE_TYPE.TIP));
+        this.txtTipRate3.addTextChangedListener(new MyTextWatcher(
+        		this.txtTipRate3, this.btnSaveTip3, Util.RATE_TYPE.TIP));
+
+        // set cursor to end of string.
+        this.txtTaxRate.setSelection(this.txtTaxRate.getText().length());        
+    }
+    
+    private void setSettings() {
         this.txtTaxRate.setText( String.format("%.3f", this.setting.getTaxRate()) );
         this.txtTipRate0.setText( "" + this.setting.getTipRate0() );
         this.txtTipRate1.setText( "" + this.setting.getTipRate1() );
         this.txtTipRate2.setText( "" + this.setting.getTipRate2() );
         this.txtTipRate3.setText( "" + this.setting.getTipRate3() );
-
-        this.txtTaxRate.addTextChangedListener(new MyTextWatcher(this.txtTaxRate, this.btnSaveTax, Util.RATE_TYPE.TAX));
-        this.txtTipRate0.addTextChangedListener(new MyTextWatcher(this.txtTipRate0, this.btnSaveTip0, Util.RATE_TYPE.TIP));
-        this.txtTipRate1.addTextChangedListener(new MyTextWatcher(this.txtTipRate1, this.btnSaveTip1, Util.RATE_TYPE.TIP));
-        this.txtTipRate2.addTextChangedListener(new MyTextWatcher(this.txtTipRate2, this.btnSaveTip2, Util.RATE_TYPE.TIP));
-        this.txtTipRate3.addTextChangedListener(new MyTextWatcher(this.txtTipRate3, this.btnSaveTip3, Util.RATE_TYPE.TIP));
-
+        
         this.btnSaveTax.setEnabled(false);
         this.btnSaveTip0.setEnabled(false);
         this.btnSaveTip1.setEnabled(false);
         this.btnSaveTip2.setEnabled(false);
         this.btnSaveTip3.setEnabled(false);        
-
-        // set cursor to end of string.
-        this.txtTaxRate.setSelection(this.txtTaxRate.getText().length());        
     }
         
     @Override
@@ -79,9 +88,22 @@ public class SettingActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingActivity.class);
-            startActivity(intent);        
+        if (id == R.id.action_reset) {
+        	new AlertDialog.Builder(this)
+            .setTitle("Confirm")
+            .setMessage("Reset settings to default?")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                	SettingActivity.this.setting.reset();
+                	SettingActivity.this.setSettings();
+
+                    Toast.makeText(getApplicationContext(), 
+                            getString(R.string.msg_settingReset), 
+                            Toast.LENGTH_SHORT).show();
+                }
+            })
+            .setNegativeButton(android.R.string.no, null).show();
 
             return true;
         }
@@ -143,7 +165,6 @@ public class SettingActivity extends ActionBarActivity {
     private boolean validateTaxRate(EditText s) {
         EditText e = (EditText) s;
         String v = e.getText().toString().trim();
-        //Util.Log("SettingActivity", "validateTaxRate: " + v);
         if (v.equals("") || v.equals(".")) {
             //this.txt_TipCustomInput.setText("0");
             return false;
@@ -152,7 +173,6 @@ public class SettingActivity extends ActionBarActivity {
             double val = Double.parseDouble(v);
             if (val >= 100) {
                 int pos = e.getSelectionStart();
-                //Util.Log("SettingActivity", "tax overflow: " + val + ", pos = " + pos);
                 // positions here are tested and work properly.
                 e.setText(v.substring(0, pos-1) + v.substring(pos, v.length()));
                 e.setSelection(pos-1);
