@@ -180,9 +180,9 @@ public class MainActivity extends ActionBarActivity {
 
     
     
-    /**********************************************************************
-     * Start major sections of functions.
-     **********************************************************************/
+    ////////////////////////////////////////////////////////////////////////
+    // Start major section of functions.
+    ////////////////////////////////////////////////////////////////////////
     
     /**
      * Save current state to persistent storage.
@@ -204,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
     /**
-     *     Recover state from persistent storage.
+     * Recover state from persistent storage.
      */
     private void recoverState() {
         try {        
@@ -344,7 +344,6 @@ public class MainActivity extends ActionBarActivity {
         this.tip_rate_1 = this.setting.getTipRate1() / 100.0;
         this.tip_rate_2 = this.setting.getTipRate2() / 100.0;
         this.tip_rate_3 = this.setting.getTipRate3() / 100.0;
-        this.tip_rate_custom = this.setting.getTipRateCustom() / 100.0;
     }
     
     /**
@@ -717,9 +716,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     
-    /***********************************************************************
-     * Begin definition for instance variables.
-     ***********************************************************************/
+    //////////////////////////////////////////////////////////////////////// 
+    // Begin definition for instance variables.
+    ////////////////////////////////////////////////////////////////////////
     
     private RadioButton btn_Tip0;
     private RadioButton btn_Tip1;

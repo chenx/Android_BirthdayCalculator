@@ -17,7 +17,7 @@
     <TableRow android:id="@+id/tableRow1"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -47,7 +47,7 @@
     <TableRow android:id="@+id/tableRowTax"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">    
         
@@ -79,7 +79,7 @@
     <TableRow android:id="@+id/tableRow2"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -113,7 +113,7 @@
     <TableRow android:id="@+id/tableRow3"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -147,7 +147,7 @@
     <TableRow android:id="@+id/tableRow4"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -181,7 +181,7 @@
     <TableRow android:id="@+id/tableRow5"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -215,7 +215,7 @@
     <TableRow android:id="@+id/tableRow6"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -223,7 +223,8 @@
             android:id="@+id/tableLayout2"
             android:layout_width="0dp"
             android:layout_weight="37"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
             tools:context="com.xc.hi.birthdaycalculator.MainActivity$PlaceholderFragment" >
         <TableRow>
         <RadioButton
@@ -252,14 +253,15 @@
             android:id="@+id/txt_TipCustom"
             android:layout_width="0dp"
             android:layout_weight="33"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@string/xml_$0" />
     
         <TextView
             android:id="@+id/txt_TotalCustom"
             android:layout_width="0dp"
             android:layout_weight="30"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/xml_$0" />
     </TableRow>
@@ -269,7 +271,7 @@
     <TableRow android:id="@+id/tableRow7"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@drawable/tablerow_background"
         android:padding="5dip">
             
@@ -317,24 +319,27 @@
     <TableRow android:id="@+id/tableRow8"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:background="@drawable/rounded_corners"
-        android:padding="10dip"
+        android:weightSum="100"
+        android:gravity="center_vertical"
+        android:padding="5dip"
         >
             
         <TextView
             android:layout_width="0dp"
             android:layout_weight="70"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_span="2"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="@string/xml_billPerPerson" />
         
         <TextView            
             android:id="@+id/txt_BillPerPerson"
             android:layout_width="0dp"
             android:layout_weight="30"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:layout_span="1"
             android:gravity="center"
             android:text="@string/xml_$0" />
     </TableRow>
