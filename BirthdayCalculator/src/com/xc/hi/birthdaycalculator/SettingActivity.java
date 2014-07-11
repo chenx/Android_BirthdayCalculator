@@ -29,6 +29,7 @@ public class SettingActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        Util.setOverflowShowingAlways(this);
         
         this.btnSaveTax = (Button) findViewById(R.id.btnSaveTax);
         this.btnSaveTip0 = (Button) findViewById(R.id.btnSaveTip0);

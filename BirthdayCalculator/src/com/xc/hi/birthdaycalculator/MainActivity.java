@@ -44,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
         //            .add(R.id.container, new PlaceholderFragment()).commit();
         //}
         this.getDebugMode();
+        Util.setOverflowShowingAlways(this);
         Util.Log("MainActivity", "enter onCreate()");
     }
     

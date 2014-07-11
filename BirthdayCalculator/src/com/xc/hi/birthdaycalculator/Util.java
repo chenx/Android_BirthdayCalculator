@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.ViewConfiguration;
 
 /**
  * Utility functions.
@@ -97,4 +98,28 @@ public class Util {
         TAX, /* 0-99, double  */
         TIP  /* 0-99, integer */
     }
+    
+    /**
+     * Disable this feature of a Android phone:
+     * System automatically detect the existence of physical menu button, and if it exists,
+     * do not display ActionBar overflow button (in the upper right corner).
+     * 
+     * By disabling this feature, the ActionBar overflow button always shows,
+     * this makes user experience consistent on different brands of Android phones.
+     * 
+     * @see http://blog.csdn.net/guolin_blog/article/details/18234477
+     * @since 7/10/2014
+     */
+    public static void setOverflowShowingAlways(ActionBarActivity this$0) {  
+        try {  
+            ViewConfiguration config = ViewConfiguration.get(this$0);  
+            java.lang.reflect.Field menuKeyField = 
+            		ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");  
+            menuKeyField.setAccessible(true);  
+            menuKeyField.setBoolean(config, false);  
+        } catch (Exception e) {  
+            //e.printStackTrace();
+            Log(this$0.getLocalClassName(), "Util.setOverflowShowingAlways() exception: " + e.getMessage());
+        }  
+    }      
 }
