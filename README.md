@@ -3,7 +3,7 @@ Android_BirthdayCalculator
 
 An Android project: A Bill/Tip Calculator. 
 
-This is named BirthdayCalculator since some birthday part functions are under planning. But this is now a standalone bill/tip calculator before further development.
+This is named BirthdayCalculator since some birthday party functions are under planning. But this is now a standalone bill/tip calculator before further development.
 
 About
 -----
