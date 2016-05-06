@@ -14,6 +14,10 @@ In the repository, BirthdayCalculator is the project. The other appcompat_v7 is 
 
 You can download releases (including source code, installation apk file and screenshot image) from the <a href="https://github.com/chenx/Android_BirthdayCalculator/releases">release link above</a>.  The App is built with the setting of Android SDK min version 11 and target version 19. In other words, to install this App, you should have Android 3.0 (Honey<a href="http://en.wikipedia.org/wiki/Android_version_history"> </a>comb) or above to be safely compatible.
 
+Here is a screenshot from the simulator:
+
+<img src="https://cloud.githubusercontent.com/assets/993980/3535037/fde1aeae-07f8-11e4-9db1-dd086d67c025.jpg">
+
 Development environment
 -----------------------
 
