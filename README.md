@@ -16,7 +16,7 @@ You can download releases (including source code, installation apk file and scre
 
 Here is a screenshot from the simulator:
 
-<img src="https://cloud.githubusercontent.com/assets/993980/3535037/fde1aeae-07f8-11e4-9db1-dd086d67c025.jpg">
+<img src="https://cloud.githubusercontent.com/assets/993980/3535037/fde1aeae-07f8-11e4-9db1-dd086d67c025.jpg" width="80%">
 
 Development environment
 -----------------------
